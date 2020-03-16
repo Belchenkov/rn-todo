@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     block: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 15
     },
     input: {
         width: '70%',
