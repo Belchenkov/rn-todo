@@ -1,5 +1,11 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, TextInput, Button } from 'react-native'
+import {
+    StyleSheet,
+    View,
+    TextInput,
+    Button,
+    Alert
+} from 'react-native'
 
 const AddTodo = ({ onSubmit }) => {
     const [value, setValue] = useState('');
@@ -9,7 +15,7 @@ const AddTodo = ({ onSubmit }) => {
             onSubmit(value);
             setValue('');
         } else {
-            // error
+            Alert.alert('Обязательное поле');
         }
     };
 
@@ -19,7 +25,10 @@ const AddTodo = ({ onSubmit }) => {
                 style={styles.input}
                 onChangeText={setValue}
                 value={value}
+                autoCorrect={false}
                 placeholder="Введите название дела..."
+                // autoCapitalize="none"
+                // keyboardType='number-pad'
             />
             <Button title="Добавить" onPress={pressHandler} />
         </View>
