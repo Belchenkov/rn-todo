@@ -6,28 +6,17 @@ import AddTodo from './src/AddTodo';
 import Todo from "./src/Todo";
 
 export default function App() {
-  const [todos, setTodos] = useState([
-      {id: 1, title: 'text'},
-      {id: 2, title: 'text'},
-      {id: 3, title: 'text'},
-      {id: 4, title: 'text'},
-      {id: 5, title: 'text'},
-      {id: 6, title: 'text'},
-      {id: 7, title: 'text'},
-      {id: 8, title: 'text'},
-      {id: 9, title: 'text'},
-      {id: 10, title: 'text'},
-      {id: 11, title: 'text'},
-      {id: 12, title: 'text'},
-      {id: 13, title: 'text'},
-      {id: 14, title: 'text'},
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const addTodo = title => {
       setTodos(prev => [...prev, {
           id: Date.now().toString(),
           title
       }]);
+  };
+
+  const removeTodo = id => {
+      setTodos(prev => prev.filter(todo => todo.id !== id));
   };
 
   return (
@@ -39,7 +28,7 @@ export default function App() {
           keyExtractor={item => item.id.toString()}
           data={todos}
           renderItem={({ item }) => (
-              <Todo todo={item} />
+              <Todo todo={item} onRemove={removeTodo} />
           )}
       />
 
