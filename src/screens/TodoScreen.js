@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from "react-native";
 
+import {THEME} from "../theme";
+
 const TodoScreen = ({ goBack, todo }) => {
     return (
         <View>
@@ -9,14 +11,14 @@ const TodoScreen = ({ goBack, todo }) => {
                 <View style={styles.button}>
                     <Button
                         title='Назад'
-                        color='#757575'
+                        color={THEME.GREY_COLOR}
                         onPress={goBack}
                     />
                 </View>
                 <View style={styles.button}>
                     <Button
                         title='Удалить'
-                        color='#e53935'
+                        color={THEME.DANGER_COLOR}
                         onPress={goBack}
                     />
                 </View>
