@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
+import * as Font from 'expo-font';
 
 import Navbar from './src/components/Navbar';
 import MainScreen from "./src/screens/MainScreen";
 import TodoScreen from "./src/screens/TodoScreen";
+
+async function loadApplication() {
+    await Font.loadAsync({
+        'gloria-regular': require('./assets/fonts/GloriaHallelujah-Regular.ttf')
+    });
+}
 
 export default function App() {
   const [todoId, setTodoId] = useState(null);
