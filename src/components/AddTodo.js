@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+
 import {
     StyleSheet,
+    Alert,
     View,
     TextInput,
-    Alert,
-    Button
+    Keyboard
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 
@@ -18,6 +19,7 @@ const AddTodo = ({ onSubmit }) => {
         if (value.trim()) {
             onSubmit(value);
             setValue('');
+            // Keyboard.dismiss();
         } else {
             Alert.alert('Обязательное поле');
         }
