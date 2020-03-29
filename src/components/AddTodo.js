@@ -3,11 +3,13 @@ import {
     StyleSheet,
     View,
     TextInput,
-    Alert
+    Alert,
+    Button
 } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 
 import {THEME} from "../theme";
+import AppButton from "./ui/AppButton";
 
 const AddTodo = ({ onSubmit }) => {
     const [value, setValue] = useState('');
@@ -32,9 +34,10 @@ const AddTodo = ({ onSubmit }) => {
                 // autoCapitalize="none"
                 // keyboardType='number-pad'
             />
-            <AntDesign.Button onPress={pressHandler} name="pluscircleo">
+            {/*<AntDesign.Button onPress={pressHandler} name="pluscircleo">
                 Добавить
-            </AntDesign.Button>
+            </AntDesign.Button>*/}
+            <AppButton onPress={pressHandler}>Добавить</AppButton>
         </View>
     )
 };

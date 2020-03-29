@@ -9,7 +9,7 @@ import TodoScreen from "./src/screens/TodoScreen";
 
 // Load Fonts
 async function loadApplication() {
-   /* await Font.loadAsync({
+    /*await Font.loadAsync({
         'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
         'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf')
     })*/
