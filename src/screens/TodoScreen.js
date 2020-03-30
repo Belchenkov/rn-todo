@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button, Dimensions } from "react-native";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 
 import {THEME} from "../theme";
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     button: {
-        width: '40%',
+        width: Dimensions.get('window').width / 3,
         borderRadius: 10
     },
     title: {
