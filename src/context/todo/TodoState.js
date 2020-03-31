@@ -6,15 +6,15 @@ import { todoReducer }  from './todoReducer';
 const TodoState = ({ children }) => {
     const initialState = {
         todos: [
-            {id: '1', title: 'Закончить курс по React Native'}
+            {id: '1', title: 'Закончить курс по React Native (April)'}
         ]
     };
 
     const [state, dispatch] = useReducer(todoReducer, initialState);
 
-    return <TodoContext.Provider value={{
+    return (<TodoContext.Provider value={{
         todos: state.todos
-    }}>{ children }</TodoContext.Provider>;
+    }}>{ children }</TodoContext.Provider>);
 };
 
 export default TodoState;

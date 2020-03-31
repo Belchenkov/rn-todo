@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
 
-const TodoContext = createContext;
+const TodoContext = createContext();
 
 export default TodoContext;
