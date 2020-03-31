@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+
 import {
     StyleSheet,
+    Alert,
     View,
     TextInput,
-    Button,
-    Alert
+    Keyboard
 } from 'react-native'
+import { AntDesign } from '@expo/vector-icons';
 
 import {THEME} from "../theme";
+import AppButton from "./ui/AppButton";
 
 const AddTodo = ({ onSubmit }) => {
     const [value, setValue] = useState('');
@@ -16,6 +19,7 @@ const AddTodo = ({ onSubmit }) => {
         if (value.trim()) {
             onSubmit(value);
             setValue('');
+            // Keyboard.dismiss();
         } else {
             Alert.alert('Обязательное поле');
         }
@@ -32,7 +36,10 @@ const AddTodo = ({ onSubmit }) => {
                 // autoCapitalize="none"
                 // keyboardType='number-pad'
             />
-            <Button title="Добавить" onPress={pressHandler} />
+            {/*<AntDesign.Button onPress={pressHandler} name="pluscircleo">
+                Добавить
+            </AntDesign.Button>*/}
+            <AppButton onPress={pressHandler}>Добавить</AppButton>
         </View>
     )
 };
