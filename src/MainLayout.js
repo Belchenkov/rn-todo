@@ -8,18 +8,18 @@ import TodoScreen from "./screens/TodoScreen";
 import TodoContext from "./context/todo/todoContext";
 
 const MainLayout = () => {
-    const todoContext = useContext(TodoContext);
+    const { todos, addTodo, removeTodo, updateTodo } = useContext(TodoContext);
     const [todoId, setTodoId] = useState(null);
-    const [todos, setTodos] = useState([]);
+    // const [todos, setTodos] = useState([]);
 
-    const addTodo = title => {
+    /*const addTodo = title => {
         setTodos(prev => [...prev, {
             id: Date.now().toString(),
             title
         }]);
     };
-
-    const removeTodo = id => {
+*/
+    /*const removeTodo = id => {
         const todo = todos.find(t => t.id === id);
 
         Alert.alert(
@@ -42,8 +42,8 @@ const MainLayout = () => {
             {cancelable: false},
         );
     };
-
-    const updateTodo = (id, title) => {
+*/
+    /*const updateTodo = (id, title) => {
         setTodos(old => old.map(todo => {
             if (todo.id === id) {
                 todo.title = title;
@@ -51,12 +51,12 @@ const MainLayout = () => {
 
             return todo;
         }));
-    };
+    };*/
 
     let content = (
         <MainScreen
             openTodo={id => setTodoId(id)}
-            todos={todoContext.todos}
+            todos={todos}
             addTodo={addTodo}
             removeTodo={removeTodo}
         />
