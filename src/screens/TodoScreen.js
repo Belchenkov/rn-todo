@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, Button, Dimensions } from "react-native";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 
@@ -7,12 +7,18 @@ import AppCard from "../components/ui/AppCard";
 import EditModal from "../components/EditModal";
 import AppTextBold from "../components/ui/AppTextBold";
 import AppButton from "../components/ui/AppButton";
+import TodoContext from "../context/todo/todoContext";
+import ScreenContext from "../context/screen/screenContext";
 
-const TodoScreen = ({ goBack, todo, onRemove, onSave }) => {
+const TodoScreen = () => {
+    const { todos, updateTodo, removeTodo } = useContext(TodoContext);
+    const { todoId, changeScreen } = useContext(ScreenContext);
     const [modal, setModal] = useState(false);
 
+    const todo = todos.find(t => t.id === todoId);
+
     const saveHandler = title => {
-        onSave(todo.id, title);
+        updateTodo(todo.id, title);
         setModal(false);
     };
 
@@ -34,13 +40,13 @@ const TodoScreen = ({ goBack, todo, onRemove, onSave }) => {
                 <View style={styles.button}>
                     <AppButton
                         color={THEME.GREY_COLOR}
-                        onPress={goBack}
+                        onPress={() => changeScreen(null)}
                     >Назад</AppButton>
                 </View>
                 <View style={styles.button}>
                     <AppButton
                         color={THEME.DANGER_COLOR}
-                        onPress={() => onRemove(todo.id)}
+                        onPress={() => removeTodo(todo.id)}
                     >Удалить</AppButton>
                 </View>
             </View>
