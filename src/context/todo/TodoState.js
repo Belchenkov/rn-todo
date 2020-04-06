@@ -5,7 +5,7 @@ import TodoContext from './todoContext';
 import { todoReducer }  from './todoReducer';
 import {
     ADD_TODO,
-    CLEAR_ERROR,
+    CLEAR_ERROR, FETCH_TODOS,
     HIDE_LOADER,
     REMOVE_TODO,
     SHOW_ERROR,
@@ -15,6 +15,8 @@ import {
 import ScreenContext from "../screen/screenContext";
 
 const TodoState = ({ children }) => {
+    const urlTodos = 'https://rn-todo-minin.firebaseio.com/todos.json';
+
     const initialState = {
         todos: [],
         loading: false,
@@ -25,7 +27,7 @@ const TodoState = ({ children }) => {
     const [state, dispatch] = useReducer(todoReducer, initialState);
 
     const addTodo = async title => {
-        const response = await fetch('https://rn-todo-minin.firebaseio.com/todos.json', {
+        const response = await fetch(urlTodos, {
            method: 'POST',
            headers: {
                'Content-Type': 'application/json'
@@ -62,6 +64,21 @@ const TodoState = ({ children }) => {
         );
     };
 
+    const fetchTodos = async () => {
+      const response = await fetch(urlTodos, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json'
+          }
+      });
+
+      const data = await response.json();
+
+      const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
+        console.log(todos);
+      dispatch({ type: FETCH_TODOS, todos });
+    };
+
     const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title });
 
     const showLoader = () => dispatch({ type: SHOW_LOADER });
@@ -76,8 +93,11 @@ const TodoState = ({ children }) => {
         <TodoContext.Provider
             value={{
                 todos: state.todos,
+                loading: state.loading,
+                error: state.error,
                 addTodo,
                 removeTodo,
+                fetchTodos,
                 updateTodo
             }}
         >{ children }</TodoContext.Provider>
