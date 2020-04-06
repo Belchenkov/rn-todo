@@ -10,32 +10,8 @@ import ScreenContext from "./context/screen/screenContext.js";
 const MainLayout = () => {
     const { todoId } = useContext(ScreenContext);
 
-    /*const removeTodo = id => {
-        const todo = todos.find(t => t.id === id);
-
-        Alert.alert(
-            'Удаление элемента',
-            `Вы действительно хотите удалить ${todo.title}?`,
-            [
-                {
-                    text: 'Отмена',
-                    style: 'cancel',
-                },
-                {
-                    text: 'Удалить',
-                    style: 'negative',
-                    onPress: () => {
-                        setTodoId();
-                        setTodos(prev => prev.filter(todo => todo.id !== id));
-                    }
-                },
-            ],
-            {cancelable: false},
-        );
-    };
-*/
     return (
-        <View>
+        <View style={styles.wrapper}>
             <Navbar title='RN - Todo App' />
 
             <View style={styles.container}>
@@ -48,8 +24,12 @@ const MainLayout = () => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         paddingHorizontal: THEME.PADDING_HORIZONTAL,
         paddingVertical: 20
+    },
+    wrapper: {
+        flex: 1
     }
 });
 

@@ -6,6 +6,7 @@ import Todo from "../components/Todo";
 import {THEME} from "../theme";
 import TodoContext from "../context/todo/todoContext";
 import ScreenContext from "../context/screen/screenContext";
+import AppLoader from "../components/ui/AppLoader";
 
 const MainScreen = () => {
     const { todos, addTodo, removeTodo, fetchTodos, loading, error } = useContext(TodoContext);
@@ -32,6 +33,9 @@ const MainScreen = () => {
         }
     });
 
+    if (loading) {
+        return <AppLoader />;
+    }
 
     let content = (
         <View style={{ width: deviceWidth }}>
