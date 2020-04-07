@@ -66,21 +66,27 @@ const TodoState = ({ children }) => {
 
     const fetchTodos = async () => {
       showLoader();
+      clearError();
 
-      const response = await fetch(urlTodos, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      });
+      try {
+          const response = await fetch(urlTodos, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          });
 
-      const data = await response.json();
+          const data = await response.json();
 
-      const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
-        console.log(todos);
+          const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
 
-      dispatch({ type: FETCH_TODOS, todos });
-      hideLoader();
+          dispatch({ type: FETCH_TODOS, todos });
+      } catch (e) {
+          showError('Ошибка при загрузке данных');
+          console.log(e);
+      } finally {
+          hideLoader();
+      }
     };
 
     const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title });
