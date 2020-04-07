@@ -15,6 +15,7 @@ import {
 import ScreenContext from "../screen/screenContext";
 
 const TodoState = ({ children }) => {
+    const url = 'https://rn-todo-minin.firebaseio.com';
     const urlTodos = 'https://rn-todo-minin.firebaseio.com/todos.json';
 
     const initialState = {
@@ -89,7 +90,22 @@ const TodoState = ({ children }) => {
       }
     };
 
-    const updateTodo = (id, title) => dispatch({ type: UPDATE_TODO, id, title });
+    const updateTodo = async (id, title) => {
+        try {
+            await fetch(`${url}/${id}.json`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title })
+            });
+
+            dispatch({ type: UPDATE_TODO, id, title });
+        } catch (e) {
+            showError('Ошибка при загрузке данных');
+            console.log(e);
+        }
+    };
 
     const showLoader = () => dispatch({ type: SHOW_LOADER });
 
