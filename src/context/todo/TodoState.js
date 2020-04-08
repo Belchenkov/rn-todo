@@ -13,6 +13,7 @@ import {
     UPDATE_TODO
 } from "../types";
 import ScreenContext from "../screen/screenContext";
+import { Http } from "../../http";
 
 const TodoState = ({ children }) => {
     const url = 'https://rn-todo-minin.firebaseio.com';
@@ -28,15 +29,7 @@ const TodoState = ({ children }) => {
     const [state, dispatch] = useReducer(todoReducer, initialState);
 
     const addTodo = async title => {
-        const response = await fetch(urlTodos, {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/json'
-           },
-           body: JSON.stringify({ title })
-        });
-
-        const data = await response.json();
+        const data = await Http.post(urlTodos, { title });
 
         dispatch({ type: ADD_TODO, title, id: data.name });
     };
@@ -58,12 +51,7 @@ const TodoState = ({ children }) => {
                     onPress: async () => {
                         changeScreen(null);
 
-                        await fetch(`${url}/${id}.json`, {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        });
+                        await Http.delete(`${url}/${id}.json`);
 
                         dispatch({ type: REMOVE_TODO, id });
                     }
@@ -78,14 +66,7 @@ const TodoState = ({ children }) => {
       clearError();
 
       try {
-          const response = await fetch(urlTodos, {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json'
-              }
-          });
-
-          const data = await response.json();
+          const data = await Http.get(urlTodos);
 
           const todos = Object.keys(data).map(key => ({ ...data[key], id: key }));
 
@@ -100,13 +81,7 @@ const TodoState = ({ children }) => {
 
     const updateTodo = async (id, title) => {
         try {
-            await fetch(`${url}/${id}.json`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ title })
-            });
+            await Http.patch(`${url}/${id}.json`, { title });
 
             dispatch({ type: UPDATE_TODO, id, title });
         } catch (e) {
