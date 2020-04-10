@@ -13,3 +13,5 @@ web-report/
 .idea
 # macOS
 .DS_Store
+debug.log
+.env
